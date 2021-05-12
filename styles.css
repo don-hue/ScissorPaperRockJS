@@ -111,3 +111,15 @@ body {
     transform: scale(1.1);
     border: 2px solid yellow;
 }
+/*------------score-----------*/
+
+#container3 {
+    display:flex;
+    margin-top: 3rem;
+    max-height: 10rem;
+    text-align: center;
+    flex-direction: center;
+    justify-content: center;
+    justify-content: space-evenly;
+    animation: fadeIn 8s ease-in;
+}

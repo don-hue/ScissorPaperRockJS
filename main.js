@@ -16,7 +16,7 @@ function doStuff() {
     }
 }
 initiateTimeOut(i);
-
+//----------------------------------------------------------------------------
 //--------------------------animation when keyboard pressed-------------------
 function removeTransition(e) {
     e.target.classList.remove('input');
@@ -35,62 +35,59 @@ function removeTransition(e) {
 
 
 
-
-
+//------------------------------------------------------------------------------------
+//-----------------------game logic---------------------------------------------------
 
 //Function returns one value from (Scissor, Paper and Rock)
+let myArray=["Scissor", "Paper", "Rock"];
+
+//Function for Computer Choice
 function computerPlay() {
     let randomNumber= Math.floor(Math.random()*myArray.length);
     return myArray[randomNumber];
 }
 
-    //create function playerSelection
-        // case senstive
-function playerSelection() {
-    let playerChoose= prompt("Please Choose between Scissor, Paper, Rock or Exit");
-    playerChoose=playerChoose.toLowerCase();
-    if (playerChoose != "exit") {
-        return playerChoose;
-    }
-    else if (playerChoose =="exit"){
-        return "Ok, Chicken";
-    }
-}
-//create function playRound
-    //takes two parameter - playerSelection & computerSelection 
-    //returns - You lose or You win. 
-
-function playRound() {
-    let playa= playerSelection();
+//Function that listens for keyboard-input and decides a win or lose
+let PlayerCount=0;
+let computerCount=0;
+function playRound(e) {
+    let playa= e.keyCode;
     let maschine=computerPlay();
-    if (playa=="scissor" && maschine=="Paper") {
-        return "W";
+    const playerScore=document.querySelector('.player');
+    const computerScore=document.querySelector('.computer');
+    if (playa=="83" && maschine=="Paper") {
+        PlayerCount=PlayerCount+1;
+        playerScore.textContent=PlayerCount;
     }
-    if (playa=="scissor" && maschine=="Rock") {
-        return "L";
+    if (playa=="83" && maschine=="Rock") {
+        computerCount=computerCount+1;
+        computerScore.textContent=computerCount;
     }
-    if (playa=="paper" && maschine=="Scissor") {
-        return "L";
+    if (playa=="65" && maschine=="Scissor") {
+        computerCount=computerCount+1;
+        computerScore.textContent=computerCount;
     }
-    if (playa=="paper" && maschine=="Rock") {
-        return "W";
+    if (playa=="65" && maschine=="Rock") {
+        PlayerCount=PlayerCount+1;
+        playerScore.textContent=PlayerCount;
     }
-    if (playa=="rock" && maschine=="Scissor") {
-        return "W";
+    if (playa=="68" && maschine=="Scissor") {
+        PlayerCount=PlayerCount+1;
+        playerScore.textContent=PlayerCount;
     }
-    if (playa=="rock" && maschine=="Paper") {
-        return "L";
+    if (playa=="68" && maschine=="Paper") {
+        computerCount=computerCount+1;
+        computerScore.textContent=computerCount;
     }
     else {
         return "Toss-Up";
     }
+    console.log(playerScore)
 
 }
+window.addEventListener('keydown', playRound);
 
-//create function called game
-    //use previous function inside this one to play 5 rounds
-    //use prompt to get input from user
-
+//printing score of each game onto UI
 function game() {
     let NumberOfRounds=prompt("Please Enter Number of Rounds");
     console.log("You Selected "+NumberOfRounds +" Rounds");
